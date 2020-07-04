@@ -87,7 +87,7 @@ module Papers
         next unless File.exist?(File.join(spec.full_gem_path, path))
 
         extract_license(File.read(File.join(spec.full_gem_path, path)))
-      end || 'OTHER'
+      end || 'Unknown'
     end
     
     # TODO: Use licensee
