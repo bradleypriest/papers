@@ -70,7 +70,7 @@ module Papers
     end
 
     def gem_entry(spec)
-      gem_license     = blank?(spec.license) ? 'Unknown' : spec.license
+      gem_license     = blank?(spec.license) ? fetch_gem_license(spec) : spec.license
       gem_project_url = blank?(spec.homepage) ? nil : spec.homepage
 
       {
@@ -79,6 +79,23 @@ module Papers
         'project_url' => ensure_valid_url(gem_project_url)
         # TODO: add support for multiple licenses? some gemspecs have dual licensing
       }
+    end
+
+    def fetch_gem_license(spec)
+      ['LICENSE', 'LICENSE.md', 'MIT-LICENSE.txt', 'MIT-LICENSE'].detect do |path|
+        return 'MIT' if ['MIT-LICENSE.txt', 'MIT-LICENSE'].include?(path)
+        next unless File.exist?(File.join(spec.full_gem_path, path))
+
+        extract_license(File.read(File.join(spec.full_gem_path, path)))
+      end || 'OTHER'
+    end
+    
+    # TODO: Use licensee
+    def extract_license(license)
+      case license
+      when /MIT License/
+        'MIT'
+      end
     end
 
     def blank?(str)
