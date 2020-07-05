@@ -12,6 +12,13 @@ module Papers
         Papers::ManifestGenerator.new.generate!
       when :update
         Papers::ManifestUpdater.new.update!
+      when :validate
+        validator = Papers::LicenseValidator.new
+        if validator.valid?
+          puts "All Licenses valid"
+        else
+          warn "License validation failed:\n#{validator.errors.join("\n")}"
+        end
       when :help
         emit_help ""
       else
@@ -35,6 +42,10 @@ module Papers
 
         opts.on("-u", "--update", "Update papers_manifest.yml for Rubygems") do |v|
           @command = :update
+        end
+
+        opts.on("-r", "--run", "Run the license validator") do |v|
+          @command = :validate
         end
 
         opts.on('-h', '--help', 'Display this screen') do
