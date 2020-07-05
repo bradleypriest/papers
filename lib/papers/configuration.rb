@@ -23,6 +23,7 @@ module Papers
         'BSD',
         'BSD-3-Clause',
         'BSD-2-Clause',
+        'BSD 2-Clause',
         'Apache 2.0',
         'Apache-2.0',
         'Apache License 2.0',
@@ -30,6 +31,7 @@ module Papers
         'LGPLv3',
         'LGPL-3.0',
         'Ruby',
+        'ruby',
         'ISC'
       ]
 
