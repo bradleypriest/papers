@@ -82,14 +82,15 @@ module Papers
     end
 
     def fetch_gem_license(spec)
-      ['LICENSE', 'LICENSE.md', 'MIT-LICENSE.txt', 'MIT-LICENSE'].detect do |path|
-        return 'MIT' if ['MIT-LICENSE.txt', 'MIT-LICENSE'].include?(path)
-        next unless File.exist?(File.join(spec.full_gem_path, path))
+      ['LICENSE', 'LICENSE.md', 'MIT-LICENSE.txt', 'MIT-LICENSE'].reduce(nil) do |iter, path|
+        next iter if iter
+        next 'MIT' if ['MIT-LICENSE.txt', 'MIT-LICENSE'].include?(path)
+        next iter unless File.exist?(File.join(spec.full_gem_path, path))
 
         extract_license(File.read(File.join(spec.full_gem_path, path)))
       end || 'Unknown'
     end
-    
+
     # TODO: Use licensee
     def extract_license(license)
       case license
