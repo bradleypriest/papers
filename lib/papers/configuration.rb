@@ -21,13 +21,15 @@ module Papers
       @license_whitelist = [
         'MIT',
         'BSD',
+        'BSD-3-Clause',
+        'BSD-2-Clause',
         'Apache 2.0',
         'Apache-2.0',
+        'Apache License 2.0',
         'LGPLv2.1',
         'LGPLv3',
+        'LGPL-3.0',
         'Ruby',
-        'Manually Reviewed',
-        'Unlicensed',
         'ISC'
       ]
 
