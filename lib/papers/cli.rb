@@ -13,6 +13,7 @@ module Papers
       when :update
         Papers::ManifestUpdater.new.update!
       when :validate
+        Papers::ManifestUpdater.new.update!
         validator = Papers::LicenseValidator.new
         if validator.valid?
           puts "All Licenses valid"
