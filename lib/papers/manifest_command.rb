@@ -82,7 +82,7 @@ module Papers
     end
 
     def fetch_gem_license(spec)
-      ['LICENSE', 'LICENSE.md', 'MIT-LICENSE.txt', 'MIT-LICENSE'].reduce(nil) do |iter, path|
+      ['LICENSE', 'LICENSE.md', 'LICENSE.txt', 'MIT-LICENSE.txt', 'MIT-LICENSE'].reduce(nil) do |iter, path|
         next iter if iter
         next 'MIT' if ['MIT-LICENSE.txt', 'MIT-LICENSE'].include?(path)
         next iter unless File.exist?(File.join(spec.full_gem_path, path))
